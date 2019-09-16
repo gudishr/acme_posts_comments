@@ -12,29 +12,31 @@ const ReactId = uuid.v4()
 const Post1Id = uuid.v4()
 const Post2Id = uuid.v4()
 const Post3Id = uuid.v4()
+const Post4Id = uuid.v4()
 
 const SQL = `
-DROP TABLE IF EXISTS posts;
 DROP TABLE IF EXISTS tags;
+DROP TABLE IF EXISTS posts;
 
 CREATE TABLE posts(
   id UUID PRIMARY KEY,
-  text VARCHAR(255) UNIQUE NOT NULL
+  topic VARCHAR(255) UNIQUE NOT NULL
 );
 
 CREATE TABLE tags(
   id UUID PRIMARY KEY,
-  topic VARCHAR(255) UNIQUE NOT NULL,
+  text VARCHAR(255) UNIQUE NOT NULL,
   post_id UUID REFERENCES posts(id)
 );
 
-INSERT INTO posts(id, text) VALUES('${NodeId}', 'Node');
-INSERT INTO posts(id, text) VALUES('${ExpressId}', 'Express');
-INSERT INTO posts(id, text) VALUES('${ReactId}', 'React');
+INSERT INTO posts(id, topic) VALUES('${NodeId}', 'Node');
+INSERT INTO posts(id, topic) VALUES('${ExpressId}', 'Express');
+INSERT INTO posts(id, topic) VALUES('${ReactId}', 'React');
 
-INSERT INTO tags(id, topic, post_id) VALUES('${Post1Id}', 'Challenging', '${ExpressId}');
-INSERT INTO tags(id, topic, post_id) VALUES('${Post2Id}', 'Loved It', '${ReactId}');
-INSERT INTO tags(id, topic, post_id) VALUES('${Post3Id}', 'What??', '${ReactId}');
+INSERT INTO tags(id, text, post_id) VALUES('${Post1Id}', 'Challenging', '${ExpressId}');
+INSERT INTO tags(id, text, post_id) VALUES('${Post2Id}', 'Loved It', '${ReactId}');
+INSERT INTO tags(id, text, post_id) VALUES('${Post3Id}', 'What??', '${ReactId}');
+INSERT INTO tags(id, text, post_id) VALUES('${Post4Id}', 'What!!', '${ReactId}');
 `
 
 const syncAndSeed = async() => {
